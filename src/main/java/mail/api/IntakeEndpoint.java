@@ -34,6 +34,7 @@ public class IntakeEndpoint {
         result.put("code", 200);
         result.put("message", "Check your mailbox for more information");
         result.put("oo-api-offering-id", offeringId);
+        //put a redirect if the user needs to be redirected to a different gui
         return ResponseEntity.ok(result);
     }
 

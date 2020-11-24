@@ -1,5 +1,6 @@
 package mail;
 
+import lombok.SneakyThrows;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,18 +28,15 @@ public class MockMailBox extends MailBox {
     @Override
     protected void setText(String html, String text, MimeMessageHelper helper) {
         String osName = System.getProperty("os.name").toLowerCase();
-        if (osName.contains("mac os x")) {// && !env.acceptsProfiles(Profiles.of("test"))) {
+        if (osName.contains("mac os x") && !env.acceptsProfiles(Profiles.of("test"))) {
             openInBrowser(html);
         }
     }
 
+    @SneakyThrows
     private void openInBrowser(String html) {
-        try {
             File tempFile = File.createTempFile("javamail", ".html");
             FileCopyUtils.copy(html.getBytes(), tempFile);
             Runtime.getRuntime().exec("open " + tempFile.getAbsolutePath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

@@ -43,9 +43,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .roles("INTAKE")
                 .password("{noop}" + intakePassword);
     }
-
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/actuator/**");
-    }
 }
