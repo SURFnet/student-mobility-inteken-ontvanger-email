@@ -31,7 +31,7 @@ public class IntakeEndpointTest {
     }
 
     @Test
-    void offerings() throws IOException {
+    void intake() throws IOException {
         given()
                 .when()
                 .contentType(ContentType.JSON)
@@ -41,8 +41,16 @@ public class IntakeEndpointTest {
                 .then()
                 .statusCode(200)
                 .body("result", equalTo("ok"));
-
-
     }
 
+    @Test
+    void intake401() throws IOException {
+        given()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(IOUtils.toByteArray(new ClassPathResource("data/request.json").getInputStream()))
+                .post("/intake")
+                .then()
+                .statusCode(401);
+    }
 }
