@@ -20,14 +20,17 @@ public class IntakeEndpoint {
     }
 
     @PostMapping(value = "/intake", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> intake(@RequestBody Map<String, Object> body) {
+    public ResponseEntity<Map<String, Object>> intake(@RequestBody Map<String, Map<String, Object>> body) {
         //See /test/resources/data/request.json for an example request-body
-        Map<String, Object> person = (Map<String, Object>) body.get("person");
-        Map<String, Object> offering = (Map<String, Object>) body.get("offering");
+        Map<String, Object> person = body.get("person");
+        Map<String, Object> offering = body.get("offering");
 
         String offeringId = (String) offering.get("offeringId");
         mailBox.sendUserConfirmation(
-                (String) person.get("displayName"), (String) person.get("mail"), offeringId, (String) offering.get("name"));
+                (String) person.get("displayName"),
+                (String) person.get("mail"),
+                offeringId,
+                (String) offering.get("name"));
 
         Map<String, Object> result = new HashMap<>();
         result.put("result", "ok");

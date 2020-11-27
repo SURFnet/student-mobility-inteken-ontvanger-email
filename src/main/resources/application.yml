@@ -14,6 +14,7 @@ spring:
     host: localhost
     port: 3025
 
+# Generic inteken credentials to check against
 intake:
   user: user
   password: secret
