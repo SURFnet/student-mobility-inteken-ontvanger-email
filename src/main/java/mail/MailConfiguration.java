@@ -24,13 +24,13 @@ public class MailConfiguration {
     private JavaMailSender mailSender;
 
     @Bean
-    @Profile({"!test"})
+    @Profile({"!test", "!dev"})
     public MailBox mailSenderProd() throws IOException {
         return new MailBox(mailSender, emailFrom);
     }
 
     @Bean
-    @Profile({"test"})
+    @Profile({"test", "dev"})
     @Primary
     public MailBox mailSenderDev(Environment environment) throws IOException {
         return new MockMailBox(mailSender, emailFrom, environment);
