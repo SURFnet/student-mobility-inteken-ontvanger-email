@@ -53,11 +53,19 @@ public class MailBox {
     }
 
     protected void doSendMail(MimeMessage message) {
-        new Thread(() -> mailSender.send(message)).start();
+        if (sendAsync()) {
+            new Thread(() -> mailSender.send(message)).start();
+        } else {
+            mailSender.send(message);
+        }
     }
 
     private String mailTemplate(String templateName, Map<String, Object> context) {
         return mustacheFactory.compile(templateName).execute(new StringWriter(), context).toString();
+    }
+
+    protected boolean sendAsync() {
+        return true;
     }
 
 }

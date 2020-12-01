@@ -33,6 +33,11 @@ public class MockMailBox extends MailBox {
         }
     }
 
+    @Override
+    protected boolean sendAsync() {
+        return false;
+    }
+
     @SneakyThrows
     private void openInBrowser(String html) {
             File tempFile = File.createTempFile("javamail", ".html");
