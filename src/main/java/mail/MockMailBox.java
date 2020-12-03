@@ -33,15 +33,10 @@ public class MockMailBox extends MailBox {
         }
     }
 
-    @Override
-    protected boolean sendAsync() {
-        return false;
-    }
-
     @SneakyThrows
     private void openInBrowser(String html) {
-            File tempFile = File.createTempFile("javamail", ".html");
-            FileCopyUtils.copy(html.getBytes(), tempFile);
-            Runtime.getRuntime().exec("open " + tempFile.getAbsolutePath());
+        File tempFile = File.createTempFile("javamail", ".html");
+        FileCopyUtils.copy(html.getBytes(), tempFile);
+        Runtime.getRuntime().exec("open " + tempFile.getAbsolutePath());
     }
 }

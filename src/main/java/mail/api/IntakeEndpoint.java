@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.mail.MessagingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class IntakeEndpoint {
     }
 
     @PostMapping(value = "/intake", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> intake(@RequestBody Map<String, Map<String, Object>> body) {
+    public ResponseEntity<Map<String, Object>> intake(@RequestBody Map<String, Map<String, Object>> body) throws MessagingException {
         //See /test/resources/data/request.json for an example request-body
         Map<String, Object> person = body.get("person");
         Map<String, Object> offering = body.get("offering");

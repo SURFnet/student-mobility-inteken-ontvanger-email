@@ -23,7 +23,7 @@ public class MailBox {
         this.emailFrom = emailFrom;
     }
 
-    public void sendUserConfirmation(String userName, String recipient, String courseIdentifier, String courseName) {
+    public void sendUserConfirmation(String userName, String recipient, String courseIdentifier, String courseName) throws MessagingException {
         Map<String, Object> variables = new HashMap<>();
         variables.put("userName", userName);
         variables.put("courseIdentifier", courseIdentifier);
@@ -31,21 +31,17 @@ public class MailBox {
         sendMail("confirmation", "Confirmation registered for " + courseName, variables, recipient);
     }
 
-    private void sendMail(String templateName, String subject, Map<String, Object> variables, String to) {
+    private void sendMail(String templateName, String subject, Map<String, Object> variables, String to) throws MessagingException {
         String html = this.mailTemplate(String.format("mail_templates/%s.html", templateName), variables);
         String text = this.mailTemplate(String.format("mail_templates/%s.txt", templateName), variables);
 
         MimeMessage message = mailSender.createMimeMessage();
-        try {
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setSubject(subject);
-            helper.setTo(to);
-            setText(html, text, helper);
-            helper.setFrom(emailFrom);
-            doSendMail(message);
-        } catch (MessagingException e) {
-            throw new IllegalArgumentException(e);
-        }
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setSubject(subject);
+        helper.setTo(to);
+        setText(html, text, helper);
+        helper.setFrom(emailFrom);
+        doSendMail(message);
     }
 
     protected void setText(String html, String text, MimeMessageHelper helper) throws MessagingException {
@@ -53,19 +49,11 @@ public class MailBox {
     }
 
     protected void doSendMail(MimeMessage message) {
-        if (sendAsync()) {
-            new Thread(() -> mailSender.send(message)).start();
-        } else {
-            mailSender.send(message);
-        }
+        new Thread(() -> mailSender.send(message)).start();
     }
 
     private String mailTemplate(String templateName, Map<String, Object> context) {
         return mustacheFactory.compile(templateName).execute(new StringWriter(), context).toString();
-    }
-
-    protected boolean sendAsync() {
-        return true;
     }
 
 }
