@@ -1,6 +1,8 @@
 package mail.api;
 
 import mail.MailBox;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +15,8 @@ import java.util.Map;
 
 @RestController
 public class IntakeEndpoint {
+
+    private static final Log LOG = LogFactory.getLog(IntakeEndpoint.class);
 
     private final MailBox mailBox;
 
@@ -27,9 +31,13 @@ public class IntakeEndpoint {
         Map<String, Object> offering = body.get("offering");
 
         String offeringId = (String) offering.get("offeringId");
+        String mail = (String) person.get("mail");
+
+        LOG.debug("Starting email intake for " + mail);
+
         mailBox.sendUserConfirmation(
                 (String) person.get("displayName"),
-                (String) person.get("mail"),
+                mail,
                 offeringId,
                 (String) offering.get("name"));
 
@@ -39,6 +47,9 @@ public class IntakeEndpoint {
         result.put("message", "Check your mailbox for more information");
         result.put("oo-api-offering-id", offeringId);
         //put a redirect if the user needs to be redirected to a different gui
+
+        LOG.debug("Finished email intake for " + mail + ". Sending code 200 back.");
+
         return ResponseEntity.ok(result);
     }
 
