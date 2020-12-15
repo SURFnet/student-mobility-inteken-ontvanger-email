@@ -39,7 +39,9 @@ public class IntakeEndpoint {
                 (String) person.get("displayName"),
                 mail,
                 offeringId,
-                (String) offering.get("name"));
+                (String) offering.get("name"),
+                (String) person.get("secondaryMail"),
+                (String) person.get("initials"));
 
         Map<String, Object> result = new HashMap<>();
         result.put("result", "ok");

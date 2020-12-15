@@ -28,7 +28,7 @@ public class MockMailBox extends MailBox {
     @Override
     protected void setText(String html, String text, MimeMessageHelper helper) {
         String osName = System.getProperty("os.name").toLowerCase();
-        if (osName.contains("mac os x") && !env.acceptsProfiles(Profiles.of("test")) && false) {
+        if (osName.contains("mac os x") && !env.acceptsProfiles(Profiles.of("test"))) {
             openInBrowser(html);
         }
     }

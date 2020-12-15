@@ -16,8 +16,12 @@
             Go to this course</a>
     </div>
     <div class="middle" style="padding: 20px 0 40px 60px;max-width: 600px;">
-        <p>Hi <strong>{{userName}}</strong>,</p>
-        <p>Your have been registered for {{courseName}}.</p>
+        <p>Hi <strong>{{userName}}</strong> ({{initials}}),</p>
+        <p>Your have been registered for {{courseName}}. We have registered the following emails from your home institution:</p>
+        <ul>
+            <li>{{primaryEmail}}</li>
+            <li>{{secondaryMail}}</li>
+        </ul>
         <p>Want to learn more about something? Visit <a href="https://surf.nl">https://surf.nl</a>.</p>
     </div>
     <div class="footer"
