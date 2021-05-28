@@ -4,7 +4,9 @@ jdk:
 dist: trusty
 
 before_install:
-- pip install --user codecov
+- pyenv install 3.6.3 --skip-existing
+- pyenv global system 3.6.3
+- pip3 install --user codecov
 script:
 - mvn test
 after_success:
