@@ -23,7 +23,7 @@ public class MailBox {
         this.emailFrom = emailFrom;
     }
 
-    public void sendUserConfirmation(String userName, String recipient, String courseIdentifier, String courseName, String secondaryMail, String initials) throws MessagingException {
+    public void sendUserConfirmation(String userName, String recipient, String courseIdentifier, String courseName, String secondaryMail, String initials, String personId) throws MessagingException {
         Map<String, Object> variables = new HashMap<>();
         variables.put("userName", userName);
         variables.put("courseIdentifier", courseIdentifier);
@@ -31,6 +31,7 @@ public class MailBox {
         variables.put("primaryEmail", recipient);
         variables.put("secondaryMail", secondaryMail);
         variables.put("initials", initials);
+        variables.put("personId", personId);
         sendMail("confirmation", "Confirmation registered for " + courseName, variables, recipient);
     }
 

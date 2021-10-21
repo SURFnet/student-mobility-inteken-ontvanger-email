@@ -1,7 +1,9 @@
-Hi {{name}},
+Hi {{userName}}, ({{initials}}),
 
-Your eduID is now activated.
+Your have been registered for {{courseName}}. We have registered the following emails from your home institution:
 
-Want to learn more about SURF? Visit https://www.surf.nl
+- {{primaryEmail}}
+- {{secondaryMail}}
 
-eduID is powered by SURF.
+
+PersonID: {{personId}}

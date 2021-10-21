@@ -45,7 +45,8 @@ public class IntakeEndpoint {
                 offeringId,
                 (String) offering.get("name"),
                 (String) person.get("secondaryMail"),
-                (String) person.get("initials"));
+                (String) person.get("initials"),
+                (String) person.get("personId"));
 
         String message = StringUtils.hasText(language) && language.startsWith("nl") ? "Controlleer je mailbox voor meer informatie" : "Check your mailbox for more information";
 

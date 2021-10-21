@@ -34,7 +34,7 @@ public class MailBoxTest {
     public void sendConfirmation() throws MessagingException {
         String psychology = "Psychology";
         String secondaryMail = "jdoe@secondary.org";
-        mailBox.sendUserConfirmation("John Doe", "jdoe@example.com", "12-34-56", psychology, secondaryMail, "JAD");
+        mailBox.sendUserConfirmation("John Doe", "jdoe@example.com", "12-34-56", psychology, secondaryMail, "JAD","e9fd87a1-7e60-4b99-bd19-9b81e9185d22");
 
         MimeMessage mimeMessage = mailMessage();
         assertEquals("jdoe@example.com", mimeMessage.getRecipients(Message.RecipientType.TO)[0].toString());
