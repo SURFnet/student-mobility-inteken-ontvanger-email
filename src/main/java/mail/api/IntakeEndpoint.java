@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -43,7 +44,7 @@ public class IntakeEndpoint {
                 (String) person.get("displayName"),
                 mail,
                 offeringId,
-                (String) offering.get("name"),
+                ((Map<String, String>)((List) offering.get("name")).get(0)).get("value"),
                 (String) person.get("secondaryMail"),
                 (String) person.get("initials"),
                 (String) person.get("personId"));
