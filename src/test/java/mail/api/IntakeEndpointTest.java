@@ -31,12 +31,25 @@ public class IntakeEndpointTest {
     }
 
     @Test
-    void intake() throws IOException {
+    void intakeV4() throws IOException {
         given()
                 .when()
                 .contentType(ContentType.JSON)
                 .auth().basic("user", "secret")
-                .body(IOUtils.toByteArray(new ClassPathResource("data/request.json").getInputStream()))
+                .body(IOUtils.toByteArray(new ClassPathResource("data/requestV4.json").getInputStream()))
+                .post("/intake")
+                .then()
+                .statusCode(200)
+                .body("result", equalTo("ok"));
+    }
+
+    @Test
+    void intakeV5() throws IOException {
+        given()
+                .when()
+                .contentType(ContentType.JSON)
+                .auth().basic("user", "secret")
+                .body(IOUtils.toByteArray(new ClassPathResource("data/requestV5.json").getInputStream()))
                 .post("/intake")
                 .then()
                 .statusCode(200)
@@ -48,7 +61,7 @@ public class IntakeEndpointTest {
         given()
                 .when()
                 .contentType(ContentType.JSON)
-                .body(IOUtils.toByteArray(new ClassPathResource("data/request.json").getInputStream()))
+                .body(IOUtils.toByteArray(new ClassPathResource("data/requestV5.json").getInputStream()))
                 .post("/intake")
                 .then()
                 .statusCode(401);

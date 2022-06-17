@@ -44,7 +44,7 @@ public class IntakeEndpoint {
                 (String) person.get("displayName"),
                 mail,
                 offeringId,
-                ((Map<String, String>)((List) offering.get("name")).get(0)).get("value"),
+                getOfferingName(offering),
                 (String) person.get("secondaryMail"),
                 (String) person.get("initials"),
                 (String) person.get("personId"));
@@ -61,6 +61,15 @@ public class IntakeEndpoint {
         LOG.debug("Finished email intake for " + mail + ". Sending code 200 back.");
 
         return ResponseEntity.ok(result);
+    }
+
+    private String getOfferingName(Map<String, Object> offering) {
+        Object name = offering.get("name");
+        if (name instanceof String) {
+            return (String) name;
+        }
+        return ((Map<String, String>)((List) offering.get("name")).get(0)).get("value");
+
     }
 
 }
