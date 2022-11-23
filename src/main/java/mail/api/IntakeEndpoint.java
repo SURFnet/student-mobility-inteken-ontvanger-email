@@ -1,8 +1,10 @@
 package mail.api;
 
+import lombok.SneakyThrows;
 import mail.MailBox;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -23,12 +25,21 @@ public class IntakeEndpoint {
 
     private final MailBox mailBox;
 
-    public IntakeEndpoint(MailBox mailBox) {
+    private final boolean delayEnabled;
+    private final long delayMillis;
+
+    public IntakeEndpoint(MailBox mailBox,
+                          @Value("${delay.enabled}") boolean delayEnabled,
+                          @Value("${delay.millis-email}") long delayMillis) {
         this.mailBox = mailBox;
+        this.delayEnabled = delayEnabled;
+        this.delayMillis = delayMillis;
     }
 
     @PostMapping(value = "/intake", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> intake(HttpServletRequest request, @RequestBody Map<String, Map<String, Object>> body) throws MessagingException {
+        this.delayResponse();
+
         //Use the language to differentiate in error messages and / or any textual return information
         String language = request.getHeader("Accept-Language");
         //See /test/resources/data/request.json for an example request-body
@@ -63,6 +74,7 @@ public class IntakeEndpoint {
         return ResponseEntity.ok(result);
     }
 
+    @SuppressWarnings("unchecked")
     private String getOfferingName(Map<String, Object> offering) {
         Object name = offering.get("name");
         if (name instanceof String) {
@@ -71,5 +83,13 @@ public class IntakeEndpoint {
         return ((Map<String, String>)((List) offering.get("name")).get(0)).get("value");
 
     }
+
+    @SneakyThrows
+    void delayResponse() {
+        if (delayEnabled) {
+            Thread.sleep(delayMillis);
+        }
+    }
+
 
 }

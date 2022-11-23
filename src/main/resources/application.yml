@@ -7,6 +7,10 @@ logging:
 server:
   port: 8093
 
+delay:
+  enabled: true
+  millis-email: 1
+
 spring:
   main:
     banner-mode: off
