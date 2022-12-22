@@ -80,7 +80,7 @@ public class IntakeEndpoint {
         if (name instanceof String) {
             return (String) name;
         }
-        return ((Map<String, String>)((List) offering.get("name")).get(0)).get("value");
+        return ((Map<String, String>) ((List) offering.get("name")).get(0)).get("value");
 
     }
 

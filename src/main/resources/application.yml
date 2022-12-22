@@ -6,6 +6,9 @@ logging:
 
 server:
   port: 8093
+  error:
+    path: "/error"
+    include-message: always
 
 delay:
   enabled: true
