@@ -60,7 +60,7 @@ public class IntakeEndpoint {
                 (String) person.get("initials"),
                 (String) person.get("personId"));
 
-        String message = StringUtils.hasText(language) && language.startsWith("nl") ? "Controlleer je mailbox voor meer informatie" : "Check your mailbox for more information";
+        String message = StringUtils.hasText(language) && language.startsWith("nl") ? "Controlleer je mailbox voor meer informatie." : "Check your mailbox for more information.";
 
         Map<String, Object> result = new HashMap<>();
         result.put("result", "ok");
