@@ -1,9 +1,9 @@
 # student-mobility-inteken-ontvanger-email
-[![Build Status](https://github.com/SURFnet/student-mobility-inteken-ontvanger-email/actions/workflows/maven.yml/badge.svg)](https://github.com/SURFnet/student-mobility-inteken-ontvanger-email/actions/workflows/maven.yml/badge.svg)
+[![Build Status](https://github.com/SURFnet/student-mobility-inteken-ontvanger-email/actions/workflows/build.yml/badge.svg)](https://github.com/SURFnet/student-mobility-inteken-ontvanger-email/actions/workflows/maven.yml/badge.svg)
 [![codecov](https://codecov.io/gh/SURFnet/student-mobility-inteken-ontvanger-email/branch/main/graph/badge.svg)](https://codecov.io/gh/SURFnet/student-mobility-inteken-ontvanger-email)
 
-Specific part of the institution hosted part of the broker for educational cross-institution registrations. 
-This is an implementation that emails the user after registration 
+Specific part of the institution hosted part of the broker for educational cross-institution registrations.
+This is an implementation that emails the user after registration
 
 ## [Getting started](#getting-started)
 
