@@ -12,16 +12,24 @@ This is an implementation that emails the user after registration
 - Java 8
 - Maven 3
 
+Set the JAVA_HOME property for maven (example for macOS):
+
+```shell
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
+```
+
 ## [Building and running](#building-and-running)
 
 ### [The student-mobility-inteken-ontvanger-email-server](#student-mobility-inteken-ontvanger-email-server)
 
 This project uses Spring Boot and Maven. To run locally, type:
 
-```
+```shell
 mvn spring-boot:run
 ```
 
 To build and deploy (the latter requires credentials in your maven settings):
 
-`mvn clean deploy`
+```shell
+mvn clean deploy
+```
