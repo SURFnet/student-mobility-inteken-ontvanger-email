@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.surfnet</groupId>
     <artifactId>student-mobility-inteken-ontvanger-email</artifactId>
-    <version>0.3.0-SNAPSHOT</version>
+    <version>0.3.1-SNAPSHOT</version>
     <name>inteken-ontvanger-email</name>
     <description>inteken-ontvanger-email</description>
 
